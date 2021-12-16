@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <title>Consumer Assessment of Healthcare Providers and Systems (CAHPS)</title>
+    <link rel="stylesheet" href="vendorlibs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="vendorlibs/font-awesome-pro/css/all.css">
+    <link rel="stylesheet" href="vendorlibs/normalize.min.css">
+   <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick-theme.min.css">
+
+    <script type="module">
+
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js";
+      import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, setPersistence, browserSessionPersistence  } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyAb6bhfNgPB-_6OxR87Va5a5comyciFjvM",
+        authDomain: "cahps2021.firebaseapp.com",
+        projectId: "cahps2021",
+        storageBucket: "cahps2021.appspot.com",
+        messagingSenderId: "1090067740879",
+        appId: "1:1090067740879:web:b1f86b5a3702e8874cdfba"
+      };
+
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth();
+
+      onAuthStateChanged(auth, (user) => {
+        if (user){
+          console.log("user logged in");//, user);
+        }else{
+          location.pathname = location.pathname.replace("agenda", "index");
+        }
+      });
+
+
+      window.signin = ()=>{
+        setPersistence(auth, browserSessionPersistence)
+        .then(() => {
+          return signInWithEmailAndPassword(auth, "cahps@westat.com", "testit")
+            .then((userCredential) => {
+              console.log("gredentials", userCredential);
+            })
+            .catch((error) => {
+              console.log("error", error);
+            })
+        })
+      }
+
+
+      console.log(app, auth);
+    </script>
+<style>
+header {
+
+  height: auto;
+  min-height: 46px;
+  background: #a7a7a7 !important;
+}
+
+
+
+@media (min-width: 48em){
+  .navbar {
+    display: -webkit-box;
+    display: flex;
+    /* justify-content: flex-start; */
+    align-items: flex-start;
+    position: relative;
+    z-index: 10;
+  }
+  .navbar div {
+    display: -webkit-box;
+    display: flex;
+  }
+  .navbar .link {
+    width: auto;
+    min-width: 92px;
+  }
+
+}
+
+.navbar {
+  position: relative;
+  min-height: 45px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
+.start {
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  width: 80%;
+  padding: 1em 1em 1em 2em;
+  /* background: linear-gradient(90deg, rgba(8,73,126,1) 0%, rgba(18,103,142,1) 19%, rgba(25,123,153,1) 37%); */
+  min-height: 46px;
+      background: #532683;
+      top: -1px;
+}
+.brand {
+  display: inline-block;
+  margin-right: 1em;
+  text-decoration: none;
+}
+.start:after {
+  width: 110%;
+  background: #1caece;
+  position: absolute;
+  height: 100%;
+  content: ' ';
+  left: -2%;
+  top: 0;
+  transform: skew(30deg);
+  -webkit-box-shadow: 0px 0px 27px -2px rgba(0,0,0,0.54);
+  -moz-box-shadow: 0px 0px 27px -2px rgba(0,0,0,0.54);
+  box-shadow: 0px 0px 27px -2px rgba(0,0,0,0.54);
+}
+
+.abso {
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  padding: 1em 1em 1em 2em;
+  max-width: 20%;
+  min-height: 46px;
+}
+.navbar .link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0em 1em;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  padding-top: .2em;
+}
+
+footer {
+  /* background: #1a2a57; */
+  padding: 12px 0px;
+  background: #06477d;
+  height: 70px;
+}
+.main-wrapper {
+  min-height: inherit;
+  width: 100%;
+  position: relative;
+  background-color: #ffffff;
+  background-image: none;
+  padding-top: 2%
+}
+
+/* .greenline{
+  height:100%;
+  width:1px;
+  background: #50ac48
+} */
+
+.line {
+  height:80vh;
+  border-right:1px solid #1caece
+}
+
+.logo{
+max-width: 70%;
+margin-bottom: 1em;
+padding: 0;
+margin-left: -2em;
+}
+
+@media (min-width: 1200px) {
+.col-lg-offset-1 {
+    margin-left:3%;
+}
+}
+
+h1{
+  color:#532683;
+  font-weight:600;
+  font-size:40px
+}
+
+h3 {
+  color:#007abd;
+margin-top: 0em;
+font-weight:600;
+font-size:2em
+}
+
+.vertical{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2em 2em;
+  margin-left: 1em;
+
+}
+p, body {
+  color:#404040;
+}
+
+.vertical p{
+  max-width: 33em;
+margin: 1em 0em;
+font-size: 16px;
+
+}
+
+.strong{
+  font-weight:600;
+    color:#343a40;
+  font-size: 16px;
+
+}
+.auth-control.access {
+    font-size: 14px;
+   border: none;
+box-shadow: 0px 2px 8px rgba(0,0,0,0.15), 0px 0px 10px rgba(0,0,0,.1);
+    margin: 12px 0px 20px;
+}
+
+#passw{
+  padding:0;
+  margin:0
+}
+.auth-control {
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 4px);
+    padding: 2rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 1rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    max-width: 260px;
+    text-align: center;
+    min-width: 240px;
+    margin: 2em 0em !important;
+}
+
+  #myModal .form-control {
+    border: auto;
+    border: 1px solid #ccc;
+}
+
+#myModal .modal-header {
+    padding: 15px;
+    /* border-bottom: 1px solid #19497b; */
+    margin-left: 2em;
+    margin-right: 2em;
+    padding-bottom: 0px;
+  border-bottom: 1px solid #a7a7a7
+}
+#myModal h4.navy {
+
+    color: #007abd
+}
+
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #404040;
+    font-size: 18px;
+}
+
+  .btn-login:active, .btn-login:focus, .btn-login:hover {
+    color: #007abd;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.15), 0px 0px 10px rgba(0,0,0,.1);
+}
+.blueColor{
+  color:#00467f;
+  font-size:14px;
+}
+html{
+  overflow-x: hidden;
+}
+
+@media (min-width: 992px) and (max-width:1199px){
+.col-md-offset-1 {
+    margin-left: 2%;
+}
+}
+
+@media (max-width:991px){
+  .logo {
+      max-width: 90%;
+      margin-bottom: 1em;
+      padding: 0;
+      margin-left: -2em;
+  }
+}
+
+@media (max-width:767px){
+  .vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1em 1em;
+}
+.line {
+  height:auto;
+}
+}
+
+.across{
+  margin-top:1em;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.blueColor{
+  color:#007abd !important
+}
+
+.mb-0{
+  margin-bottom:0em
+}
+
+.link {
+    color: #007abd;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+
+
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+  margin-left: -.5rem;
+  padding-left: 0.5rem;
+
+}
+
+.link:after {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  top: calc(100% + 0.15rem);
+  width: 0;
+  height: 1px;
+  background-color: #007abd;
+  transition: width 0.3s ease-in-out;
+}
+
+.link:hover:after,
+.link:focus:after {
+  width: calc(100% - 0.5rem);
+}
+
+main {
+    min-height: calc(95vh - 60px);
+    position: relative;
+}
+sup {
+    top: -.5em;
+    color: #007abd;
+    font-weight: 800;
+}
+
+</style>
+
+    <!-- <script type="module">
+
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js";
+      import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, setPersistence, browserSessionPersistence  } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyAb6bhfNgPB-_6OxR87Va5a5comyciFjvM",
+        authDomain: "cahps2021.firebaseapp.com",
+        projectId: "cahps2021",
+        storageBucket: "cahps2021.appspot.com",
+        messagingSenderId: "1090067740879",
+        appId: "1:1090067740879:web:b1f86b5a3702e8874cdfba"
+      };
+
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth();
+
+      onAuthStateChanged(auth, (user) => {
+        if (user){
+          console.log("user logged in");//, user);
+        }else{
+          location.pathname = location.pathname.replace("agenda", "index");
+        }
+      });
+
+
+      window.signin = ()=>{
+        setPersistence(auth, browserSessionPersistence)
+        .then(() => {
+          return signInWithEmailAndPassword(auth, "cahps@westat.com", "testit")
+            .then((userCredential) => {
+              console.log("gredentials", userCredential);
+            })
+            .catch((error) => {
+              console.log("error", error);
+            })
+        })
+      }
+
+
+      console.log(app, auth);
+    </script> -->
+  </head>
+  <body>
+    <header>
+
+      <nav class="navbar">
+        <div class="start">
+
+        </div>
+
+        <div class="end abso">
+
+        </div>
+
+
+      </nav>
+
+    </header>
+    <div class="container-fluid overflow-hidden position-relative">
+
+      <section class="block0">
+        <div class="hero-img-container heros" id="Home">
+    <img src="../images/header.png" class="img-responsive logo"  alt="Surveys on Patient Safety Culture logo">
+          <div class="hero-img">
+            <div class="landing-panel">
+
+              <h3 class="text-center">New AHRQ SOPS® Workplace Safety Supplemental<br>Items for Hospitals (Webcast)</h3>
+              <h4 style="font-size:1.5em;margin:.5em 0em">Thursday, December 16th <span class="purple">|</span> 1-2:00 pm ET</h4>
+              <p>This AHRQ webcast will introduce the new <a href="https://www.ahrq.gov/sops/surveys/hospital/supplemental-items/workplace-safety.html">Surveys on Patient Safety Culture™ (SOPS®) Workplace Safety Supplemental Items</a> for hospitals. Hospitals can use the survey items as a supplement to the SOPS Hospital Survey to assess the extent to which the organizational culture supports workplace safety for providers and staff. Speakers will provide background on the importance of workplace safety, an overview of the development of the items, results from a pilot test in 28 hospitals, and share resources available for users.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="menu-buttons p-2">
+        <div class="bar"></div>
+        <ul class="menu-buttons-list">
+          <!-- <li tabindex="0" data-target="#Guide" class="objective"></li> -->
+          <li tabindex="0" data-target="#FAQ" class="agenda"></li>
+          <li tabindex="0" data-target="#Privacy" class="speakers"></li>
+          <!-- <li tabindex="0" data-target="#Contact" class="materials"></li> -->
+        </ul>
+      </div>
+
+
+      <section class="block5">
+        <div class="hero-img-agenda-bottom"></div>
+        <div id="FAQ" class="landing-sec heros">
+          <div class="guide-overlay container">
+            <!-- <h2 class="landing-sec-H text-center purple">An Update on the CAHPS Patient Narrative Item Sets</h2> -->
+
+
+            <div class="agendaBubble">
+
+
+                <h3>Webcast Agenda</h3>
+
+
+
+
+              <div class="whiteBubble">
+                <!-- <a class="join" href="https://secure-web.cisco.com/1ifFlKjk_jDzOKQDlNpMDWMlRUe52V9z71UkMb6wD7jMKc3MPosm7J46CLU2UxuF5pKW9O7w6FE1Ly9BbUGyySt4cPN6oJuUWQKu4iYXSLqevWNVQfRvLEvjULCHxDADjYq7G6sk5XDDuFyX4uTl20cOhd96TJmUfY1eyo2T2xmq-jjP-EjKwvWRKII_BM7hCturvO6gZWm_5F1g7rE-6yvIYyNnB09_SV6aoZ_bTJpkkrCouNatUEexO5dkJVXT-/https%3A%2F%2Flnks.gd%2Fl%2FeyJhbGciOiJIUzI1NiJ9.eyJidWxsZXRpbl9saW5rX2lkIjoxMDEsInVyaSI6ImJwMjpjbGljayIsImJ1bGxldGluX2lkIjoiMjAyMTEwMjcuNDc5NjA3NTEiLCJ1cmwiOiJodHRwczovL3d3dy5haHJxLmdvdi9jYWhwcy9zdXJ2ZXlzLWd1aWRhbmNlL2l0ZW0tc2V0cy9lbGljaXRhdGlvbi9pbmRleC5odG1sIn0.k_MLz4phmF33evmX7nzhYV57DJQrwZ3EPs534x-lF-g%2Fs%2F908062531%2Fbr%2F114708204506-l" target="_blank">Join Session</a> -->
+
+                <!-- <div class="tan">
+                  <h3 class="charcoal mb-0" style="font-size:18px">
+                    <span class="purple">11:00 – 11:15 a.m.</span> Welcome & Goals of the Meeting</h3>
+                </div> -->
+                <!-- <p style="margin-bottom:-1em;margin-top:1em;">Speakers:</p> -->
+                <ul>
+<!--
+               <li>Welcome and Online Meeting Logistics: <span class="purple"
+                    data-toggle="modal"
+                    data-target="#exampleModalCenter"
+                    data-cid="2"
+                    data-singleview="true">Joann Sorra, PhD</span>, Associate Director, Westat</li>  -->
+
+                  <li>Welcome from AHRQ: <span class="purple"
+                      data-toggle="modal"
+                      data-target="#exampleModalCenter"
+                      data-cid="0"
+                      data-singleview="true"
+                      >Caren Ginsberg, PhD</span>, Agency for Healthcare Research and Quality
+                  </li>
+
+
+
+
+
+                  <li>Background on Workplace Safety
+                    <span
+                      class="purple"
+                      data-toggle="modal"
+                      data-target="#exampleModalCenter"
+                      data-cid="1"
+                      data-singleview="true"
+                      >Patricia McGaffigan, RN, MS, CPPS</span>, Institute for Healthcare Improvement
+
+
+                  </li>
+
+                  <li>The SOPS Workplace Safety Items
+                    <span class="purple"
+                    data-toggle="modal" data-target="#exampleModalCenter" data-cid="3"
+                    data-singleview="true">
+                     Katarzyna Zebrak, PhD</span>, Westat</li>
+
+
+                     <li>Webcast Moderator
+                       <span class="purple"
+                       data-toggle="modal" data-target="#exampleModalCenter" data-cid="2"
+                       data-singleview="true">
+                        Naomi Yount, PhD</span>, Westat</li>
+
+
+                </ul>
+
+
+
+                <!-- <div class="tan">
+                  <h3 class="charcoal mb-0" style="font-size:18px">
+                    <span class="purple">11:15 –11:40 a.m.</span> The Power of Patient Stories</h3>
+                </div>
+
+                <ul>
+
+                  <li>Presentation: <span class="purple"
+                    data-toggle="modal"
+                    data-target="#exampleModalCenter"
+                    data-cid="2"
+                    data-singleview="true">Rachel Grob, PhD, Clinical Professor</span>, Senior Scientist, and Director of National Intitiatives, Center for Patient Partnerships, University of Wisconsin-Madison</li>
+
+                  </ul>
+
+                  <div class="tan">
+                    <h3 class="charcoal mb-0" style="font-size:18px">
+                      <span class="purple">11:40 a.m. –12:05 p.m.</span> Using Narratives for Quality Improvement</h3>
+                  </div>
+
+                  <ul>
+
+                    <li>Presentation: <span class="purple"
+                      data-toggle="modal"
+                      data-target="#exampleModalCenter"
+                      data-cid="2"
+                      data-singleview="true">Ingrid Nembhard, PhD,</span>, Fishman Family President's Distinguished Professor, Associate Professor of Health Care Management, The Wharton School, University of Pennsylvania</li>
+
+                    </ul> -->
+
+                    <div class="d-flex justify-content-center">
+                  <a
+                    class="ml-5 mt-2 btn-login"
+                    href="img/New AHRQ SOPS Workplace Safety Supplemental Items_12.14.21_FINAL.pdf"
+                    target="_blank"
+                    ><p class="white mb-0">Download slides</p></a>
+
+                  </div>
+
+
+
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </section>
+
+      <section class="block20" id="Privacy">
+
+
+        <div class="position-relative pt-4 pb-4">
+          <div class="bar"></div>
+        <h3 class="mb-0 text-center">Speakers</h3>
+        <p class="text-center mt-2 strong">
+          Select a speaker to view more about them.
+        </p>
+      </div>
+        <div class="heros mt-5">
+          <div class="container guide-overlay">
+
+
+
+            <div class="row">
+
+              <div
+                class="
+                  col-lg-3 offset-lg-3 col-md-6 col-sm-6 col-xs-12
+                  d-flex
+                  flex-column
+                  align-items-center
+                "
+              >
+                <button
+                  type="button"
+                  class="btn text-center"
+                  data-toggle="modal"
+                  data-target="#exampleModalCenter"
+                  data-cid="0"
+                >
+                  <img src="img/ginsberg.jpg" class="img-responsive" /><br />
+                  Caren Ginsberg
+                </button>
+              </div>
+
+
+              <div
+                class="
+                  col-lg-4 col-md-6 col-sm-6 col-xs-12
+                  d-flex
+                  flex-column
+                  align-items-center
+                "
+              >
+                <button
+                  type="button"
+                  class="btn text-center"
+                  data-toggle="modal"
+                  data-target="#exampleModalCenter"
+                  data-cid="1"
+                >
+                  <img src="img/mc.jpg" class="img-responsive" /><br />
+                Patricia McGaffigan
+                </button>
+              </div>
+
+
+              <div
+                class="
+                  col-lg-3 offset-lg-3 col-md-6 col-sm-6 col-xs-12
+                  d-flex
+                  flex-column
+                  align-items-center
+                "
+              >
+                <button
+                  type="button"
+                  class="btn text-center"
+                  data-toggle="modal"
+                  data-target="#exampleModalCenter"
+                  data-cid="2"
+                >
+                  <img src="img/Naomi.jpg" class="img-responsive" /><br />
+                  Naomi Yount
+                </button>
+              </div>
+
+              <div
+                class="
+                  col-lg-4 col-md-6 col-sm-6 col-xs-12
+                  d-flex
+                  flex-column
+                  align-items-center
+                "
+              >
+                <button
+                  type="button"
+                  class="btn text-center"
+                  data-toggle="modal"
+                  data-target="#exampleModalCenter"
+                  data-cid="3"
+                >
+                  <img src="img/z.jpg" class="img-responsive" /><br />
+              Katarzyna Zebrak
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- <div class="hero-img-guide"></div> -->
+      </section>
+
+      <!-- Modal -->
+      <div
+        class="modal"
+        id="exampleModalCenter"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true"
+        data-bs-backdrop="static"
+      >
+        <div
+          class="modal-dialog modal-lg modal-dialog-centered"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="wrapper">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <img class="img-responsive" src="img/close_X.svg" />
+                </button>
+                <div class="carousel">
+
+                  <div>
+                    <div class="d-flex justify-content-center">
+                      <img
+                        src="img/ginsberg.jpg"
+                        class="img-responsive first"
+                      />
+                      <div class="quoteBubble">
+                        <p class="purple strong">Caren Ginsberg, PhD, CPXP</p>
+
+                        <p class="small">
+                          <span class="strong">Caren Ginsberg</span> directs the
+                          Agency for Healthcare Research and Quality’s (AHRQ)
+                          work on the Consumer Assessment of Healthcare
+                          Providers and Systems (CAHPS®) and Surveys on Patient
+                          Safety Culture™ (SOPS®). An anthropologist and
+                          demographer, Dr. Ginsberg has broad-based experience
+                          in patient experience, patient safety, and public
+                          health. In her position at AHRQ, she focuses on
+                          program development, implementation, operations and
+                          evaluation, with specialty in survey design and
+                          development, and qualitative evaluation and
+                          assessment. Previously, she held positions at the
+                          Centers for Medicare and Medicaid Services (CMS),
+                          Westat, and the National Quality Forum.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="d-flex justify-content-center">
+                      <img src="img/mc.jpg" class="img-responsive first" />
+                      <div class="quoteBubble">
+                        <p class="purple strong">Patricia McGaffigan, RN, MS, CPPS</p>
+                        <p class="small">  Vice President, Institute for Healthcare Improvement President, Certification Board for Professionals in Patient Safety</p>
+                        <p class="small">
+                      Patricia serves as Vice President at the Institute for Healthcare Improvement and where she is IHI’s senior sponsor for the National Steering Committee for Patient Safety, and as President, Certification Board for Professionals in Patient Safety. Patricia is a Certified Professional in Patient Safety (CPPS), a graduate of the AHA-NPSF Patient Safety Leadership Fellowship Program, and is a member of the Joint Commission National Patient Safety Committee, the Joint Commission Journal on Quality and Patient Safety Editorial Advisory Board and the Advisory Committee of the Coalition to Improve Diagnosis. Patricia also serves as a Board Member of the Massachusetts Coalition for the Prevention of Medical Errors and on Planetree’s Person-Centered Certification Committee, and represents IHI on numerous committees, taskforces, and professional panels, including the Agency for Healthcare Research and Quality’s Technical Expert Panel for SOPS Safety Culture Surveys. She is a recipient of the Lifetime Member Award from the American Association of Critical Care Nurses, Patricia received her BS in Nursing from Boston College and her MS in Nursing from Boston University.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div>
+                    <div class="d-flex justify-content-center">
+                      <img src="img/Naomi.jpg" class="img-responsive first" />
+                      <div class="quoteBubble">
+                        <p class="purple strong">Naomi Yount, PhD</p>
+                        <p class="small">Senior Study Director, User Network for the AHRQ Surveys on Patient Safety Culture (SOPS), Westat</p>
+                        <p class="small">
+                          Naomi Yount is a Westat Senior Study Director and industrial/organizational psychologist with more than 15 years of experience in organizational research and analysis. She has worked with the Surveys on Patient Safety Culture to make updates to the surveys, develop supplemental items, and analyze the data.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                                    <div>
+                                      <div class="d-flex justify-content-center">
+                                        <img src="images/Zebrak.jpg" class="img-responsive first" />
+                                        <div class="quoteBubble">
+                                          <p class="purple strong">Katarzyna Zebrak, PhD</p>
+                                          <p class="small">
+                                            Senior Study Director, User Network for the AHRQ Surveys on Patient Safety Culture (SOPS), Westat
+                                          </p>
+                                          <p class="small">
+                                           Dr. Zebrak is Westat Senior Study Director and a health researcher with more than 9 years of experience conducting quantitative and qualitative research in public health and healthcare. Dr. Zebrak has engaged in extensive exploration and analyses of data from Surveys on Patient Safety Culture. She also worked on updating the Hospital Survey on Patient Safety Culture to version 2.0 and has been involved in the development and testing of several SOPS supplemental item sets, including the SOPS® Workplace Safety Supplemental Items for Hospitals. Patricia also serves as a Board Member of the Massachusetts Coalition for the Prevention of Medical Errors and on Planetree’s Person-Centered Certification Committee, and represents IHI on numerous committees, taskforces, and professional panels, including the Agency for Healthcare Research and Quality’s Technical Expert Panel for SOPS Safety Culture Surveys.
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+
+
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <footer>
+        <div class="footer-wrapper">
+
+          <a href="https://www.westat.com" target="_blank" title="Visit website"><img src="../images/white-logo.svg" alt="Westat Home page" title="Westat" class="img-wes-logo"/></a> <p class="p-wes-title t-white">An Employee-Owned Research Corporation<sup class="t-white">&reg;</sup></p></div>
+        </footer>
+
+      <!-- <div class="menu-buttons-floating">
+        <ul class="menu-buttons-floating-list">
+
+          <li tabindex="0" data-target="#FAQ"></li>
+          <li tabindex="0" data-target="#Privacy"></li>
+
+          <li tabindex="0" data-target="#Home"></li>
+        </ul>
+      </div> -->
+
+      <div class="menu-buttons-768">
+        <ul class="menu-buttons-768-list">
+          <!-- <li tabindex="0" data-target="#Guide"></li> -->
+
+          <li tabindex="0" data-target="#FAQ"></li>
+          <li tabindex="0" data-target="#Privacy"></li>
+          <li tabindex="0" data-target="#Contact"></li>
+          <li tabindex="0" data-target="#Home"></li>
+        </ul>
+      </div>
+    </div>
+    <script type="text/javascript" src="vendorlibs/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="vendorlibs/bootstrap/js/bootstrap.min.js"
+    ></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script>
+      var speakerModal = $('.carousel').slick({
+        slidesToShow: 1,
+        dots: false,
+        arrows: true,
+        centerMode: true,
+        prevArrow:
+          "<button type='button' class='slick-prev pull-left'></button>",
+        nextArrow:
+          "<button type='button' class='slick-next pull-right'></button>",
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        mobileFirst: true,
+        speed: 0,
+        useCSS: false,
+        useTransform: false,
+        waitForAnimate: false,
+        centerPadding: '12px',
+        adaptiveHeight: true,
+        responsive: [
+          {
+            breakpoint: 768,
+            settings: {
+              centerPadding: '48px',
+              adaptiveHeight: false,
+            },
+          },
+        ],
+      });
+
+      $('.modal').on('shown.bs.modal', function (e) {
+        $('html').addClass('modal-open');
+        var slideID = Number(e.relatedTarget.dataset.cid);
+        var singleview = e.relatedTarget.dataset.singleview;
+        speakerModal.slick('slickGoTo', slideID, false);
+        if (!!singleview) {
+          $('.slick-slider').addClass('hide-arrows');
+        }
+      });
+
+      $('.modal').on('hidden.bs.modal', function (e) {
+        $('html').removeClass('modal-open');
+        $('.slick-slider').removeClass('hide-arrows');
+      });
+    </script>
+  </body>
+</html>
